@@ -10,10 +10,15 @@ let [appointmentList, setAppointmentList] = useState([]);
 let [query, setQuery] = useState('');
 let [sortBy, setSortBy] = useState('petName');
 let [orderBy, setOrderBy] = useState('asc');
+let [searchToggle, setSearchToggle] = useState('false');
 const filteredAppointments = appointmentList.filter(
 	filtered => {
+			if(query== ''){
+				return;
+			}
 		return (
-			true||
+		
+			filtered.petName.toLowerCase().includes(query.toLowerCase()) ||
 			filtered.ownerName.toLowerCase().includes(query.toLowerCase()) ||
 			filtered.aptNotes.toLowerCase().includes(query.toLowerCase())
 			)
@@ -44,9 +49,9 @@ useEffect(() => {
 	
 }, [fetchData]);
  return (
-    <div className="App container mx-auto mt-3 font-thin">
+    <div className="App p-10 container mx-auto mt-3 font-thin">
       <h1 className="text-5xl mb-3" >
-	  <BiCalendar className="inline-block text-red-400" /> your appointments </h1>
+	  <BiCalendar className="inline-block text-red-400" /> Quizlet! </h1>
 	  <AddAppointment
 			onSendAppointment={myAppointment => setAppointmentList([...appointmentList,myAppointment ])}
 			lastId={appointmentList.reduce((max, item) => Number(item.id) > max ? Number(item.id):max,0)}
@@ -55,7 +60,9 @@ useEffect(() => {
 				orderBy={orderBy}
 				onOrderByChange= {myOrder => setOrderBy(myOrder)}
 				sortBy= {sortBy}
-				onSortByChange= {mySort => setSortBy(mySort)}/>
+				onSortByChange= {mySort => setSortBy(mySort)}
+				searchToggle={searchToggle}
+				onSearchToggle={toggle => setSearchToggle(!searchToggle)}/>
 	  <ul className="divide-y divide-gray-200">
 	  {filteredAppointments
 		.map(appointment => (

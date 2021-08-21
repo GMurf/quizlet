@@ -35,7 +35,7 @@ const AddAppointment = ({onSendAppointment, lastId}) => {
     <div>
       <button onClick={() => {setToggleForm(!toggleForm)}}
 	  className={`bg-blue-400 text-white px-2 py-3 w-full text-left ${toggleForm ? 'rounded-t-md':'rounded-md'} rounded-t-md`}>
-        <div><BiCalendarPlus className="inline-block align-text-top" />  Add Appointment</div>
+        <div><BiCalendarPlus className="inline-block align-text-top" />  Create Note</div>
       </button>
 	  
 	  {
@@ -44,7 +44,10 @@ const AddAppointment = ({onSendAppointment, lastId}) => {
 	   <div className="border-r-2 border-b-2 border-l-2 border-light-blue-500 rounded-b-md pl-4 pr-4 pb-4">
         <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start  sm:pt-5">
           <label htmlFor="ownerName" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-            Owner Name
+            Question or Term
+			<div className="text-sm font-light text-gray-400 sm:mt-px sm:pt-1">
+			what you want to review
+			</div>
           </label>
           <div className="mt-1 sm:mt-0 sm:col-span-2">
             <input 
@@ -56,7 +59,10 @@ const AddAppointment = ({onSendAppointment, lastId}) => {
 
         <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start  sm:pt-5">
           <label htmlFor="petName" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-            Pet Name
+            Front card Subtext
+			<div className="text-sm font-light text-gray-400 sm:mt-px sm:pt-1">
+			Provide additional context to question.
+			</div>
           </label>
           <div className="mt-1 sm:mt-0 sm:col-span-2">
             <input 
@@ -67,34 +73,14 @@ const AddAppointment = ({onSendAppointment, lastId}) => {
           </div>
         </div>
 
-        <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start  sm:pt-5">
-          <label htmlFor="aptDate" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-            Apt Date
-          </label>
-          <div className="mt-1 sm:mt-0 sm:col-span-2">
-            <input 
-			onChange={(event) => setFormData( {...formData, aptDate:event.target.value} )}
-			type="date" name="aptDate" id="aptDate" value={formData.aptDate}
-              className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md" />
-          </div>
-        </div>
+       
 
         <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start  sm:pt-5">
-          <label htmlFor="aptTime" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-            Apt Time
-          </label>
-          <div className="mt-1 sm:mt-0 sm:col-span-2">
-            <input
-			onChange={(event) => setFormData( {...formData, aptTime:event.target.value} )}
-			value={formData.aptTime}
-			type="time" name="aptTime" id="aptTime"
-              className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md" />
-          </div>
-        </div>
-
-        <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start  sm:pt-5">
-          <label htmlFor="aptNotes" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-            Appointment Notes
+          <label htmlFor="aptNotes" className="inline text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+            Back of card text
+			<div className="text-sm font-light text-gray-400 sm:mt-px sm:pt-1">
+			An explainnation or answer to your question.
+			</div>
           </label>
           <div className="mt-1 sm:mt-0 sm:col-span-2">
             <textarea 
