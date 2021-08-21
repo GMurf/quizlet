@@ -27,9 +27,10 @@ role="menuitem">Pet Name {sortBy =='petName' && <BiCheck />}</div>
     </div>
   )
 }
-const Search = ({onSearchToggle, searchToggle, query, onQueryChange, orderBy, onOrderByChange, sortBy, onSortByChange}) => {
+const Search = ({ query, onQueryChange, orderBy, onOrderByChange, sortBy, onSortByChange}) => {
 	let [toggleSort, setToggleSort] = useState(false);
   return (
+  
     <div className="py-5">
       <div className="mt-1 relative rounded-md shadow-sm">
         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
