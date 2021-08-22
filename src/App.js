@@ -3,6 +3,7 @@ import {BiCalendar, BiTrash} from 'react-icons/bi';
 import Search from './Components/Search';
 import AddAppointment from './Components/AddAppointment'
 import AppointmentInfo from './Components/AppointmentInfo'
+import Modal from './Components/Modal'
 
 
 function App() {
@@ -10,7 +11,11 @@ let [appointmentList, setAppointmentList] = useState([]);
 let [query, setQuery] = useState('');
 let [sortBy, setSortBy] = useState('petName');
 let [orderBy, setOrderBy] = useState('asc');
-let [searchToggle, setSearchToggle] = useState('false');
+let [showModal, setShowModal] = useState(false)
+let [cardToggle, setCardToggle] = useState(false)
+		
+		
+
 const filteredAppointments = appointmentList.filter(
 	filtered => {
 			if(query== ''){
@@ -48,7 +53,16 @@ useEffect(() => {
 	fetchData()
 	
 }, [fetchData]);
+
+const modal = showModal && <Modal  flipCard={()=>setCardToggle(!cardToggle)} cardToggle ={cardToggle} onHideModal={()=>setShowModal(false)} />
+
  return (
+ <>
+ 
+	 {modal}
+	 <button onClick= {()=>setShowModal(true)}>
+		show modal
+	 </button>
     <div className="App p-10 container mx-auto mt-3 font-thin">
       <h1 className="text-5xl mb-3" >
 	  <BiCalendar className="inline-block text-red-400" /> Quizlet! </h1>
@@ -61,8 +75,7 @@ useEffect(() => {
 				onOrderByChange= {myOrder => setOrderBy(myOrder)}
 				sortBy= {sortBy}
 				onSortByChange= {mySort => setSortBy(mySort)}
-				searchToggle={searchToggle}
-				onSearchToggle={toggle => setSearchToggle(!searchToggle)}/>
+			/>
 	  <ul className="divide-y divide-gray-200">
 	  {filteredAppointments
 		.map(appointment => (
@@ -77,6 +90,8 @@ useEffect(() => {
 	  }
 	  </ul>
 	</div>
+	
+	</>
   );
 }
 
