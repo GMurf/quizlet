@@ -32,8 +32,8 @@ class Modal extends React.Component{
 		
 		
 		
-		const question = this.props.cardToggle && <h1> questiont or term	</h1>
-		const answer = !this.props.cardToggle && <p> text to be on back of card </p>
+		const question = this.props.cardToggle && <h1>  {this.props.appointmentSelected.ownerName}	</h1>
+		const answer = !this.props.cardToggle && <p>  {this.props.appointmentSelected.aptNotes}</p>
 		
 		return ReactDOM.createPortal(
 	

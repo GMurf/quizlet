@@ -13,6 +13,7 @@ let [sortBy, setSortBy] = useState('petName');
 let [orderBy, setOrderBy] = useState('asc');
 let [showModal, setShowModal] = useState(false)
 let [cardToggle, setCardToggle] = useState(false)
+let [appointmentSelected, setAppointmentSelected] = useState({})
 		
 		
 
@@ -54,7 +55,7 @@ useEffect(() => {
 	
 }, [fetchData]);
 
-const modal = showModal && <Modal  flipCard={()=>setCardToggle(!cardToggle)} cardToggle ={cardToggle} onHideModal={()=>setShowModal(false)} />
+const modal = showModal && <Modal appointmentSelected={appointmentSelected}  flipCard={()=>setCardToggle(!cardToggle)} cardToggle ={cardToggle} onHideModal={()=>setShowModal(false)} />
 
  return (
  <>
@@ -70,7 +71,7 @@ const modal = showModal && <Modal  flipCard={()=>setCardToggle(!cardToggle)} car
 			onSendAppointment={myAppointment => setAppointmentList([...appointmentList,myAppointment ])}
 			lastId={appointmentList.reduce((max, item) => Number(item.id) > max ? Number(item.id):max,0)}
 			/>
-<Search query = {query} onQueryChange = {myQuery => setQuery(myQuery)}
+<Search appointmentSelected={appointmentSelected} query = {query} onQueryChange = {myQuery => setQuery(myQuery)}
 				orderBy={orderBy}
 				onOrderByChange= {myOrder => setOrderBy(myOrder)}
 				sortBy= {sortBy}
@@ -79,7 +80,7 @@ const modal = showModal && <Modal  flipCard={()=>setCardToggle(!cardToggle)} car
 	  <ul className="divide-y divide-gray-200">
 	  {filteredAppointments
 		.map(appointment => (
-			<AppointmentInfo key={appointment.id}
+	  <AppointmentInfo onAppointmentSelected ={(appt) => setAppointmentSelected(appt)} appointmentSelected= {appointmentSelected} onShowModal={(appt)=> setShowModal(true)} key={appointment.id}
 				appointment={appointment}
 				
 				onDeleteAppointment ={(appointmentId)=>
